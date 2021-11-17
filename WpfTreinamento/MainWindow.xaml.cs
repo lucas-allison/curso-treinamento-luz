@@ -119,25 +119,6 @@ namespace WpfTreinamento
             this.Close();
         }
         #endregion
-        
-        //#region Redirecionar para a tela de Cadastro
-        //private void MenuAdd_Click(object sender, RoutedEventArgs e)
-        //{
-        //    FormTimes formTime = new FormTimes();
-        //    formTime.Show();
-        //    this.Close();
-        //}
-        //#endregion
-        
-        //#region Fechar tela
-        //private void MenuSair_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (MessageBox.Show("Deseja Fechar a Tela?", "Sair do Sistema", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.No)
-        //    {
-        //        this.Close();
-        //    }
-        //}
-        //#endregion
 
         #region Editar Itens
         private void BtnEditar_Click(object sender, RoutedEventArgs e)

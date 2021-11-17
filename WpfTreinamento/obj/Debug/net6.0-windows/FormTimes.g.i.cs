@@ -125,7 +125,7 @@ namespace WpfTreinamento {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/WpfTreinamento;component/formtimes.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/WpfTreinamento;V1.0.0.0;component/formtimes.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\FormTimes.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
