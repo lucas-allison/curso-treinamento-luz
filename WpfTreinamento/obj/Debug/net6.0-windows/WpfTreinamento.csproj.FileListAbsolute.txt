@@ -29,5 +29,3 @@ C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\bin\Debug\net6.0-windows\runt
 C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\obj\Debug\net6.0-windows\WpfTreinamento.csproj.CopyComplete
 C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\obj\Debug\net6.0-windows\FormTimes.g.cs
 C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\obj\Debug\net6.0-windows\FormTimes.baml
-C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\obj\Debug\net6.0-windows\teste.g.cs
-C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\obj\Debug\net6.0-windows\teste.baml

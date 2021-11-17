@@ -33,10 +33,12 @@ namespace WpfTreinamento
 
         SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-PPGQ64R;Initial Catalog=DBTreinamento;Persist Security Info=True;User ID=sa;Password=root");
 
+        public ICommand comando { get; private set; }
+
         #region Carrega Registro da ListView
         public void LoadGrid()
         {
-            ObservableCollection<Time> timeList = new ObservableCollection<Time>();
+            ObservableCollection <Time> timeList = new ObservableCollection<Time>();
             SqlCommand cmd = new SqlCommand("select * from Time", con);
             con.Open();
             SqlDataReader sdr = cmd.ExecuteReader();
@@ -114,9 +116,28 @@ namespace WpfTreinamento
         {
             FormTimes formTime = new FormTimes();
             formTime.Show();
-            //this.Close();
+            this.Close();
         }
         #endregion
+        
+        //#region Redirecionar para a tela de Cadastro
+        //private void MenuAdd_Click(object sender, RoutedEventArgs e)
+        //{
+        //    FormTimes formTime = new FormTimes();
+        //    formTime.Show();
+        //    this.Close();
+        //}
+        //#endregion
+        
+        //#region Fechar tela
+        //private void MenuSair_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (MessageBox.Show("Deseja Fechar a Tela?", "Sair do Sistema", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.No)
+        //    {
+        //        this.Close();
+        //    }
+        //}
+        //#endregion
 
         #region Editar Itens
         private void BtnEditar_Click(object sender, RoutedEventArgs e)
@@ -127,6 +148,7 @@ namespace WpfTreinamento
                 Time time = (Time)listgrid.SelectedItem;
                 FormTimes formTimes = new FormTimes(time);
                 formTimes.Show();
+                this.Close();
             }
             else
             {

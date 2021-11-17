@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTreinamento"
         mc:Ignorable="d"
-        Title="Consulta de Times" Height="450" Width="800">
-    <Grid>
+        Title="Consulta de Times" Height="450" Width="800" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
+    <Grid ClipToBounds="True" Height="450">
         <Rectangle HorizontalAlignment="Center" Height="74" Stroke="Black" VerticalAlignment="Top" Width="800" Fill="#FF07A963"/>
         <Label Content="Consulta de Times" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold"/>
-        <ListView x:Name="listgrid" ItemsSource="{Binding}" HorizontalAlignment="Stretch" Height="265" VerticalAlignment="Top" Width="800" Margin="0,79,0,0">
+        <ListView x:Name="listgrid" ItemsSource="{Binding}" HorizontalAlignment="Stretch" Height="265" VerticalAlignment="Top" Width="800" Margin="0,79,0,0" FontSize="14">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path='ID'}" Width="100"/>
@@ -19,9 +19,9 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="BtnRmv" Content="Remover" HorizontalAlignment="Left" Margin="509,358,0,0" VerticalAlignment="Top" Height="36" Width="162" FontSize="16" CommandParameter="{Binding ElementName=listgrid}" RenderTransformOrigin="0.452,-0.278" Click="BtnRmv_Click" Background="#FF07A963" Foreground="White" BorderBrush="#FF067545" ClickMode="Release"/>
-        <Button Content="Adicionar" HorizontalAlignment="Left" Margin="122,358,0,0" VerticalAlignment="Top" Width="162" Height="36" Click="BtnAdicionar_Click" FontSize="16" Background="#FF07A963" Foreground="White" BorderBrush="#FF067545"/>
-        <Button x:Name="BtnEdit" Content="Editar" HorizontalAlignment="Center" Margin="0,358,0,0" VerticalAlignment="Top" Height="36" Width="162" FontSize="16" CommandParameter="{Binding ElementName=listgrid}" Click="BtnEditar_Click" Background="#FF07A963" Foreground="White" BorderBrush="#FF067545"/>
+        <Button x:Name="BtnRmv" Content="Remover" HorizontalAlignment="Left" Margin="510,362,0,0" VerticalAlignment="Top" Height="36" Width="162" FontSize="16" CommandParameter="{Binding ElementName=listgrid}" RenderTransformOrigin="0.452,-0.278" Click="BtnRmv_Click" Background="#FF07A963" Foreground="White" BorderBrush="#FF067545" ClickMode="Release"/>
+        <Button Content="Adicionar" HorizontalAlignment="Left" Margin="120,362,0,0" VerticalAlignment="Top" Width="162" Height="36" Click="BtnAdicionar_Click" FontSize="16" Background="#FF07A963" Foreground="White" BorderBrush="#FF067545"/>
+        <Button x:Name="BtnEdit" Content="Editar" HorizontalAlignment="Center" Margin="0,362,0,0" VerticalAlignment="Top" Height="36" Width="162" FontSize="16" CommandParameter="{Binding ElementName=listgrid}" Click="BtnEditar_Click" Background="#FF07A963" Foreground="White" BorderBrush="#FF067545"/>
 
     </Grid>
 </Window>
