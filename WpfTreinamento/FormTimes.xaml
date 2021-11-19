@@ -7,18 +7,18 @@
         mc:Ignorable="d"
         Title="Cadastro de Times" Height="350" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid Margin="0,0,0,-6" Height="350">
-        <TextBox x:Name="nome_txt" HorizontalAlignment="Left" Margin="38,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="258" Height="27" FontSize="14"/>
-        <TextBox x:Name="div_txt" HorizontalAlignment="Left" Margin="354,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="64" Height="26" FontSize="14"/>
-        <TextBox x:Name="regiao_txt" HorizontalAlignment="Left" Margin="488,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="258" Height="25" FontSize="14"/>
+        <TextBox Text="{Binding time.Nome}" HorizontalAlignment="Left" Margin="38,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="258" Height="27" FontSize="14"/>
+        <TextBox Text="{Binding time.Divisao}" HorizontalAlignment="Left" Margin="354,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="64" Height="26" FontSize="14"/>
+        <TextBox Text="{Binding time.Regiao}" HorizontalAlignment="Left" Margin="488,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="258" Height="25" FontSize="14"/>
         <Label Content="Nome" HorizontalAlignment="Left" Margin="38,93,0,0" VerticalAlignment="Top" Height="35" Width="131" FontSize="18" RenderTransformOrigin="0.517,0.173"/>
         <Label Content="Região" HorizontalAlignment="Left" Margin="488,93,0,0" VerticalAlignment="Top" Height="34" Width="131" FontSize="18"/>
         <Label Content="Divisão" HorizontalAlignment="Left" Margin="352,93,0,0" VerticalAlignment="Top" Height="35" Width="131" FontSize="18"/>
-        <Button x:Name="BtnAdicionar" Content="Salvar" HorizontalAlignment="Left" Margin="114,256,0,0" VerticalAlignment="Top" Height="36" Width="164" FontSize="16" Click="BtnAdicionar_Click" Background="#FF07A963" Foreground="White" BorderBrush="#FF15D895"/>
-        <Button x:Name="BtnEditar" Content="Atualizar" HorizontalAlignment="Left" Margin="114,255,0,0" VerticalAlignment="Top" Height="36" Width="162" FontSize="16" Click="BtnEditar_Click" Visibility="Hidden" Background="#FF07A963" BorderBrush="#FF15D895" Foreground="White"/>
-        <Button x:Name="BtnConsultar" Content="Consultar" HorizontalAlignment="Left" Margin="521,256,0,0" VerticalAlignment="Top" Height="36" Width="162" FontSize="16" Click="BtnConsultar_Click" RenderTransformOrigin="0.604,2.039" Background="#FF07A963" Foreground="White" BorderBrush="#FF15D895"/>
-        <TextBox x:Name="search_txt" HorizontalAlignment="Left" Margin="38,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153" Height="25" IsEnabled="False" FontSize="14"/>
+        <Button x:Name="BtnAdicionar" CommandParameter="{Binding}" Command="{Binding salvar}" Content="Salvar" HorizontalAlignment="Left" Margin="114,256,0,0" VerticalAlignment="Top" Height="36" Width="164" FontSize="16" RenderTransformOrigin="0.452,-0.278" Background="#FF07A963" Foreground="White" BorderBrush="#FF15D895" ClickMode="Release"/>
+        <Button x:Name="BtnEditar" CommandParameter="{Binding}" Command="{Binding editar}" Content="Atualizar" HorizontalAlignment="Left" Margin="114,255,0,0" VerticalAlignment="Top" Height="36" Width="164" FontSize="16" Visibility="Hidden" Background="#FF07A963" BorderBrush="#FF15D895" Foreground="White"/>
+        <!--<Button x:Name="BtnConsultar" Content="Consultar" HorizontalAlignment="Left" Margin="521,256,0,0" VerticalAlignment="Top" Height="36" Width="162" FontSize="16" Click="BtnConsultar_Click" RenderTransformOrigin="0.604,2.039" Background="#FF07A963" Foreground="White" BorderBrush="#FF15D895"/>-->
+        <TextBox Text="{Binding time.ID}" HorizontalAlignment="Left" Margin="38,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153" Height="25" IsEnabled="False" FontSize="14"/>
         <Label Content="ID" HorizontalAlignment="Left" Margin="38,160,0,0" VerticalAlignment="Top" Height="35" Width="131" FontSize="18"/>
-        <Button x:Name="BtnLimpar" Content="Limpar" HorizontalAlignment="Left" Margin="317,256,0,0" VerticalAlignment="Top" Height="36" Width="163" FontSize="16" Click="BtnLimpar_Click" Background="#FF07A963" Foreground="White" BorderBrush="#FF15D895"/>
+        <!--<Button x:Name="BtnLimpar" Content="Limpar" HorizontalAlignment="Left" Margin="317,256,0,0" VerticalAlignment="Top" Height="36" Width="163" FontSize="16" Click="BtnLimpar_Click" Background="#FF07A963" Foreground="White" BorderBrush="#FF15D895"/>-->
         <Rectangle HorizontalAlignment="Center" Height="74" Stroke="Black" VerticalAlignment="Top" Width="800" Fill="#FF07A963"/>
         <Label x:Name="Titulo" Content="Cadastro de Times" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold"/>
 
