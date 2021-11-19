@@ -36,11 +36,11 @@ namespace WpfTreinamento
         }
 
         #region Consulta Time, Incui botão Alterar e Altera Título
-        
+
         private void consultarTime(Time time)
         {
             MainWindowVM mainWindowVM = (MainWindowVM)this.DataContext;
-            
+
             if (time != null)
             {
                 mainWindowVM.time = time;
@@ -48,6 +48,33 @@ namespace WpfTreinamento
                 BtnEditar.Visibility = Visibility.Visible;
                 BtnAdicionar.Visibility = Visibility.Hidden;
             }
+        }
+
+        #endregion
+
+        #region Redireciona para tela de Consulta
+        
+        private void BtnConsultar_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow main = new MainWindow();
+            main.Show();
+            this.Close();
+        }
+        
+        #endregion
+
+        #region Limpa os Campos
+
+        private void BtnLimpar_Click(object sender, RoutedEventArgs e)
+        {
+            limparCampos();
+        }
+
+        public void limparCampos()
+        {
+            nome_txt.Clear();
+            div_txt.Clear();
+            regiao_txt.Clear();
         }
 
         #endregion
