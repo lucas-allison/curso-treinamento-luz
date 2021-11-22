@@ -4,23 +4,37 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTreinamento"
+        xmlns:converters="clr-namespace:WpfTreinamento.Conversores"
         mc:Ignorable="d"
         Title="Consulta de Times" Height="450" Width="800" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
+
+    <Window.Resources>
+        <converters:TimeMultiBindingConverter x:Key="TimeMultiBindingConverter"/>
+    </Window.Resources>
+
     <Grid ClipToBounds="True" Height="450">
         <Rectangle HorizontalAlignment="Center" Height="74" Stroke="Black" VerticalAlignment="Top" Width="800" Fill="#FF07A963"/>
         <Label Content="Consulta de Times" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold"/>
-        <ListView x:Name="listgrid" ItemsSource="{Binding timeList}" HorizontalAlignment="Stretch" Height="265" VerticalAlignment="Top" Width="800" Margin="0,79,0,0" FontSize="14">
+        <ListView x:Name="listgrid" ItemsSource="{Binding timeList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HorizontalAlignment="Stretch" Height="265" VerticalAlignment="Top" Width="800" Margin="0,79,0,0" FontSize="14">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path='ID'}" Width="100"/>
-                    <GridViewColumn Header="Nome" DisplayMemberBinding="{Binding Path='Nome'}" Width="100"/>
-                    <GridViewColumn Header="Divisão" DisplayMemberBinding="{Binding Path='Divisao'}" Width="100"/>
-                    <GridViewColumn Header="Região" DisplayMemberBinding="{Binding Path='Regiao'}" Width="100"/>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path='ID'}" />
+                    <GridViewColumn Header="Nome" DisplayMemberBinding="{Binding Path='Nome'}" />
+                    <GridViewColumn Header="Divisão" DisplayMemberBinding="{Binding Path='Divisao'}" />
+                    <GridViewColumn Header="Região" DisplayMemberBinding="{Binding Path='Regiao'}" />
+                    <GridViewColumn Header="Campeonato" DisplayMemberBinding="{Binding Path='NomeCampeonato'}" />
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button CommandParameter="{Binding ElementName=listgrid}" Command="{Binding deletar}" Content="Remover" HorizontalAlignment="Left" Margin="510,362,0,0" VerticalAlignment="Top" Height="36" Width="162" FontSize="16" RenderTransformOrigin="0.452,-0.278" Background="#FF07A963" Foreground="White" BorderBrush="#FF067545" ClickMode="Release"/>
-        <Button Click="abrirTelaFormTimes" Content="Adicionar" HorizontalAlignment="Left" Margin="120,362,0,0" VerticalAlignment="Top" Width="162" Height="36" FontSize="16" Background="#FF07A963" Foreground="White" BorderBrush="#FF067545"/>
-        <Button Click="abrirTelaFormTimes" CommandParameter="{Binding ElementName=listgrid}" Command="{Binding popularCampos}" Content="Editar" HorizontalAlignment="Center" Margin="0,362,0,0" VerticalAlignment="Top" Height="36" Width="162" FontSize="16" Background="#FF07A963" Foreground="White" BorderBrush="#FF067545"/>
+        <Button CommandParameter="{Binding ElementName=listgrid}" Command="{Binding deletar}" Content="Remover" HorizontalAlignment="Left" Margin="507,362,0,0" VerticalAlignment="Top" Height="36" Width="162" FontSize="16" RenderTransformOrigin="0.452,-0.278" Background="#FF07A963" Foreground="White" BorderBrush="#FF067545" ClickMode="Release"/>
+        <Button CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Command="{Binding abrirTelaFT}" Content="Adicionar" HorizontalAlignment="Left" Margin="120,362,0,0" VerticalAlignment="Top" Width="162" Height="36" FontSize="16" Background="#FF07A963" Foreground="White" BorderBrush="#FF067545"/>
+        <Button Content="Editar" Command="{Binding abrirTelaFT}" HorizontalAlignment="Center" Margin="0,362,0,0" VerticalAlignment="Top" Height="36" Width="162" FontSize="16" Background="#FF07A963" Foreground="White" BorderBrush="#FF067545">
+            <Button.CommandParameter>
+                <MultiBinding Converter="{StaticResource ResourceKey=TimeMultiBindingConverter}" Mode="TwoWay">
+                    <Binding RelativeSource="{RelativeSource AncestorType= Window}" />
+                    <Binding ElementName="listgrid" />
+                </MultiBinding>
+            </Button.CommandParameter>
+        </Button>
     </Grid>
 </Window>

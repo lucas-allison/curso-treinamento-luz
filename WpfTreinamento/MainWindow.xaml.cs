@@ -16,7 +16,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Collections.ObjectModel;
 using WpfTreinamento.Modelos;
-
+using WpfTreinamento.Conversores;
 namespace WpfTreinamento
 {
     /// <summary>
@@ -29,33 +29,6 @@ namespace WpfTreinamento
         {
             InitializeComponent();
             DataContext = new MainWindowVM();
-        }
-        private void abrirTelaFormTimes(object sender, RoutedEventArgs e)
-        {
-            FormTimes formTime = null;
-            Button btn = (Button)sender;
-            ListView? listgrid = btn.CommandParameter as ListView;
-
-            if (btn.Content.Equals("Editar"))
-            {
-                if (listgrid != null && listgrid.SelectedItem != null)
-                {
-                    Time time = (Time)listgrid.SelectedItem;
-                    formTime = new FormTimes(time);
-                    formTime.Show();
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Necessário Selecionar uma Linha para Editar!!", "Editar Registro", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-            }
-            else
-            {
-                formTime = new FormTimes();
-                formTime.Show();
-                this.Close();
-            }
         }
     }
 }

@@ -11,10 +11,10 @@ C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\bin\Debug\net6.0-windows\runt
 C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\bin\Debug\net6.0-windows\runtimes\win-x86\native\sni.dll
 C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
-C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\obj\Debug\net6.0-windows\WpfTreinamento.csproj.AssemblyReference.cache
 C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\obj\Debug\net6.0-windows\FormTimes.g.cs
 C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\obj\Debug\net6.0-windows\MainWindow.g.cs
 C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\obj\Debug\net6.0-windows\App.g.cs
+C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
 C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\obj\Debug\net6.0-windows\WpfTreinamento_MarkupCompile.cache
 C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\obj\Debug\net6.0-windows\WpfTreinamento_MarkupCompile.lref
 C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\obj\Debug\net6.0-windows\FormTimes.baml
@@ -29,4 +29,4 @@ C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\obj\Debug\net6.0-windows\WpfT
 C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\obj\Debug\net6.0-windows\ref\WpfTreinamento.dll
 C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\obj\Debug\net6.0-windows\WpfTreinamento.pdb
 C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\obj\Debug\net6.0-windows\WpfTreinamento.genruntimeconfig.cache
-C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\obj\Debug\net6.0-windows\WpfTreinamento.csproj.AssemblyReference.cache
