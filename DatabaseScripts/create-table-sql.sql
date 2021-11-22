@@ -10,9 +10,10 @@ GO
 
 CREATE TABLE [dbo].[Time](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
-	[Nome] [nchar](50) NULL,
-	[Divisao] [nchar](10) NULL,
-	[Regiao] [nchar](50) NULL
+	[Nome] [nvarchar](50) NULL,
+	[Divisao] [nvarchar](10) NULL,
+	[Regiao] [nvarchar](50) NULL,
+	[NomeCampeonato] [nvarchar](100) NULL
 ) ON [PRIMARY]
 GO
 
