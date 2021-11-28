@@ -6,18 +6,21 @@ using System.Windows.Input;
 using System.Data.SqlClient;
 using System.Data;
 using System.Collections.ObjectModel;
+using WpfTreinamento.Contratos;
 using System.ComponentModel;
+using WpfTreinamento.Modelos;
+using WpfTreinamento.Repositorios;
 
-namespace WpfTreinamento.Modelos
+namespace WpfTreinamento
 {
     public class MainWindowVM : INotifyPropertyChanged
     {
         #region Declarações
 
         private ObservableCollection<Time> _timeList;
-        public ObservableCollection<Time> timeList { get { return _timeList; } set { _timeList = value; Notifica("timeList"); } }
         private Time _time;
-        public Time time { get { return _time; } set { _time = value; Notifica("time"); } }
+        public ObservableCollection<Time> timeList { get { return _timeList; } set { _timeList = value; Notifica(nameof(timeList)); } }
+        public Time time { get { return _time; } set { _time = value; Notifica(nameof(time)); } }
         public ICommand abrirTelaFT { get; private set; }
         public ICommand abrirTelaMW { get; private set; }
         public ICommand salvar { get; private set; }
@@ -25,7 +28,8 @@ namespace WpfTreinamento.Modelos
         public ICommand editar { get; private set; }
         public ICommand limparCampos { get; private set; }
 
-        SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-PPGQ64R;Initial Catalog=DBTreinamento;Persist Security Info=True;User ID=sa;Password=root");
+        private ITimeRepository timeRepository;
+        private readonly ViewModelIntermediate viewModelIntermediate;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -33,25 +37,13 @@ namespace WpfTreinamento.Modelos
 
         #region Construtor
 
-        public MainWindowVM()
+        public MainWindowVM(ITimeRepository _timeRepository)
         {
+            timeRepository = _timeRepository;
+            viewModelIntermediate = new ViewModelIntermediate(this);
+
             LoadGrid();
-
-            abrirTelaFT = new RelayCommand(AbrirTelaFormTimes);
-
-            abrirTelaMW = new RelayCommand((object parametro) =>
-            {
-                FormTimes formTime = (FormTimes)parametro;
-                AbrirTelaMainWindow(formTime);
-            });
-
-            salvar = new RelayCommand(AdicionaTime);
-
-            deletar = new RelayCommand(DeletaTime, ValidaBloqueioBotaoDeletar);
-
-            editar = new RelayCommand(EditaTime);
-
-            limparCampos = new RelayCommand(LimparCampos);
+            RegistrarComandos();
         }
 
         #endregion
@@ -60,43 +52,13 @@ namespace WpfTreinamento.Modelos
 
         #region Carrega Registro da ListView
 
-        public void LoadGrid()
+        private void LoadGrid()
         {
-            timeList = new ObservableCollection<Time>();
-            time = new Time();
-            SqlCommand cmd = new SqlCommand("select * from Time order by ID", con);
-            con.Open();
-            SqlDataReader sdr = cmd.ExecuteReader();
+            timeList = timeRepository.ListarTimes();
 
-            if (sdr.HasRows)
-            {
-                while (sdr.Read())
-                {
-                    Time time = new Time();
-                    time.ID = Convert.ToInt32(sdr["ID"]);
-                    time.Nome = sdr["Nome"].ToString();
-                    time.Divisao = sdr["Divisao"].ToString();
-                    time.Regiao = sdr["Regiao"].ToString();
-                    time.NomeCampeonato = sdr["NomeCampeonato"].ToString();
-
-                    timeList.Add(time);
-                }
-            }
-            else
+            if (timeList.Count == 0)
             {
                 Console.WriteLine("Nenhum registro encontrado.");
-            }
-
-            cmd.Dispose();
-            con.Close();
-        }
-
-        //Método de Notificação
-        private void Notifica(string propriedade)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propriedade));
             }
         }
 
@@ -109,29 +71,17 @@ namespace WpfTreinamento.Modelos
             ListView? listgrid = parametro as ListView;
             if (listgrid != null && listgrid.SelectedItem != null)
             {
-                try
+                if (MessageBox.Show("Deseja Remover este Registro?", "Remover Registro", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.No)
                 {
-                    if (MessageBox.Show("Deseja Remover este Registro?", "Remover Registro", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.No)
+                    Time time = (Time)listgrid.SelectedItem;
+                    int result = timeRepository.DeletaTime(time.ID);
+
+                    if (result > 0)
                     {
-                        Time time = (Time)listgrid.SelectedItem;
-                        con.Open();
-                        SqlCommand cmd = new SqlCommand($"DELETE FROM Time Where ID = {time.ID}", con);
-                        int result = cmd.ExecuteNonQuery();
-
-                        if (result > 0)
-                        {
-                            MessageBox.Show("Registro Removido", "Deletar Registro", MessageBoxButton.OK, MessageBoxImage.Information);
-                        }
-
-                        cmd.Dispose();
-                        con.Close();
-
-                        LoadGrid();
+                        MessageBox.Show("Registro Removido", "Deletar Registro", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Não Foi Possível Remover Registro: {ex.Message}", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                    LoadGrid();
                 }
             }
             else
@@ -147,39 +97,23 @@ namespace WpfTreinamento.Modelos
         private void AdicionaTime(object parametro)
         {
             FormTimes formTime = (FormTimes)parametro;
-            int retorno = 0;
+            int result = 0;
 
-            try
+            if (EstaValido(time))
             {
-                if (EstaValido(time))
+                result = timeRepository.AdicionaTime(time);
+
+                if (result > 0)
                 {
-                    SqlCommand cmd = new SqlCommand("INSERT INTO Time VALUES (@Nome, @Divisao, @Regiao, @Campeonato)", con);
-                    cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@Nome", time?.Nome);
-                    cmd.Parameters.AddWithValue("@Divisao", time?.Divisao);
-                    cmd.Parameters.AddWithValue("@Regiao", time?.Regiao);
-                    cmd.Parameters.AddWithValue("@Campeonato", time?.NomeCampeonato);
-                    con.Open();
-                    retorno = cmd.ExecuteNonQuery();
+                    MessageBox.Show("Registro salvo com sucesso!!", "Registro Salvo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    AbrirTelaMainWindow(formTime);
 
-                    if (retorno > 0)
-                    {
-                        MessageBox.Show("Registro salvo com sucesso!!", "Registro Salvo", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                        AbrirTelaMainWindow(formTime);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Não foi possível adicionar o time", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-
-                    cmd.Dispose();
-                    con.Close();
+                    LoadGrid();
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                else
+                {
+                    MessageBox.Show("Não foi possível adicionar o time", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
@@ -190,33 +124,24 @@ namespace WpfTreinamento.Modelos
         private void EditaTime(object parametro)
         {
             FormTimes formTime = (FormTimes)parametro;
+            int result = 0;
 
-            try
+            if (MessageBox.Show("Deseja Editar este Registro?", "Editar Registro", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.No)
             {
-                if (MessageBox.Show("Deseja Editar este Registro?", "Editar Registro", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.No)
+                if (EstaValido(time))
                 {
-                    SqlCommand cmd = new SqlCommand("UPDATE Time SET Nome = '" + time.Nome + "', " +
-                    "Divisao = '" + time.Divisao + "', " +
-                    "Regiao = '" + time.Regiao + "', " +
-                    "NomeCampeonato = '" + time.NomeCampeonato + "' " +
-                    "WHERE ID = '" + time.ID + "'", con);
-                    con.Open();
+                    result = timeRepository.EditaTime(time);
 
-                    if (EstaValido(time))
+                    if (result > 0)
                     {
-                        cmd.ExecuteNonQuery();
-
                         MessageBox.Show("Registro Editado com Sucesso!!", "Editar Registro", MessageBoxButton.OK, MessageBoxImage.Information);
                         AbrirTelaMainWindow(formTime);
                     }
-
-                    cmd.Dispose();
-                    con.Close();
+                    else
+                    {
+                        MessageBox.Show("Não foi possível editar o time", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message);
             }
         }
 
@@ -226,10 +151,10 @@ namespace WpfTreinamento.Modelos
 
         private void AbrirTelaMainWindow(FormTimes formTime)
         {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
+            MainWindow mainWindow = viewModelIntermediate.MainWindowInstantiate();
+            formTime ??= viewModelIntermediate.FormTimesInstantiate();
 
-            formTime ??= new FormTimes();
+            mainWindow.Show();
             formTime.Close();
         }
 
@@ -239,8 +164,9 @@ namespace WpfTreinamento.Modelos
 
         private void AbrirTelaFormTimes(object parametro)
         {
-            MainWindow mainWindow = new MainWindow();
-            FormTimes formTime = new FormTimes();
+            MainWindow mainWindow;
+            time = new Time();
+            FormTimes formTime = viewModelIntermediate.FormTimesInstantiate();
 
             switch (parametro)
             {
@@ -275,31 +201,40 @@ namespace WpfTreinamento.Modelos
 
         #region Valida Campos
 
-        public bool EstaValido(Time? time)
+        private bool EstaValido(Time? time)
         {
-            if (string.IsNullOrWhiteSpace(time.Nome))
+            if (time != null)
             {
-                MessageBox.Show("Necessário preencher o nome", "Falha", MessageBoxButton.OK, MessageBoxImage.Error);
+                if (string.IsNullOrWhiteSpace(time.Nome))
+                {
+                    MessageBox.Show("Necessário preencher o nome", "Falha", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                }
+
+                if (string.IsNullOrWhiteSpace(time.Divisao))
+                {
+                    MessageBox.Show("Necessário preencher a divisão", "Falha", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                }
+
+                if (string.IsNullOrWhiteSpace(time.Regiao))
+                {
+                    MessageBox.Show("Necessário preencher a região", "Falha", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                }
+
+                if (string.IsNullOrWhiteSpace(time.NomeCampeonato))
+                {
+                    MessageBox.Show("Necessário preencher o nome do campeonato", "Falha", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Time inválido", "Falha", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(time.Divisao))
-            {
-                MessageBox.Show("Necessário preencher a divisão", "Falha", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(time.Regiao))
-            {
-                MessageBox.Show("Necessário preencher a região", "Falha", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(time.NomeCampeonato))
-            {
-                MessageBox.Show("Necessário preencher o nome do campeonato", "Falha", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
             return true;
         }
 
@@ -333,11 +268,36 @@ namespace WpfTreinamento.Modelos
 
         #endregion
 
+        #region Utilitários
+
+        private void RegistrarComandos()
+        {
+            salvar = new RelayCommand(AdicionaTime);
+            deletar = new RelayCommand(DeletaTime, ValidaBloqueioBotaoDeletar);
+            editar = new RelayCommand(EditaTime);
+            limparCampos = new RelayCommand(LimparCampos);
+            abrirTelaFT = new RelayCommand(AbrirTelaFormTimes);
+            abrirTelaMW = new RelayCommand((object parametro) =>
+            {
+                FormTimes formTime = (FormTimes)parametro;
+                AbrirTelaMainWindow(formTime);
+            });
+        }
+
         private bool ValidaBloqueioBotaoDeletar(object propriedade)
         {
             ListView listgrid = (ListView)propriedade;
             return listgrid.Items.Count > 0;
         }
+        private void Notifica(string propriedade)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propriedade));
+            }
+        }
+
+        #endregion
 
         #endregion
     }

@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using WpfTreinamento.Modelos;
 
 namespace WpfTreinamento
 {
@@ -8,10 +7,14 @@ namespace WpfTreinamento
     /// </summary>
     public partial class FormTimes : Window
     {
-        public FormTimes()
+        private readonly MainWindowVM mainWindowVM;
+
+        public FormTimes(MainWindowVM _mainWindowVM)
         {
+            mainWindowVM = _mainWindowVM;
+
             InitializeComponent();
-            DataContext = new MainWindowVM();
+            DataContext = mainWindowVM;
         }
     }
 }

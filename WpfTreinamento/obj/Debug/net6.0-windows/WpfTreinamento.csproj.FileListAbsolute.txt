@@ -29,4 +29,5 @@ C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\obj\Debug\net6.0-windows\WpfT
 C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\obj\Debug\net6.0-windows\ref\WpfTreinamento.dll
 C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\obj\Debug\net6.0-windows\WpfTreinamento.pdb
 C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\obj\Debug\net6.0-windows\WpfTreinamento.genruntimeconfig.cache
-C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\obj\Debug\net6.0-windows\WpfTreinamento.csproj.AssemblyReference.cache
+C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\bin\Debug\net6.0-windows\Microsoft.Extensions.DependencyInjection.dll
+C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\bin\Debug\net6.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll

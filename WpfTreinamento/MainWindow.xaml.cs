@@ -1,22 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Data.SqlClient;
-using System.Data;
-using System.Collections.ObjectModel;
-using WpfTreinamento.Modelos;
-using WpfTreinamento.Conversores;
+﻿using System.Windows;
 namespace WpfTreinamento
 {
     /// <summary>
@@ -24,11 +6,14 @@ namespace WpfTreinamento
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly MainWindowVM mainWindowVM;
 
-        public MainWindow()
+        public MainWindow(MainWindowVM _mainWindowVM)
         {
+            mainWindowVM = _mainWindowVM;
+
             InitializeComponent();
-            DataContext = new MainWindowVM();
+            DataContext = mainWindowVM;
         }
     }
 }

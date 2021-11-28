@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
+using WpfTreinamento.Contratos;
+using WpfTreinamento.Repositorios;
 
 namespace WpfTreinamento
 {
@@ -13,5 +10,18 @@ namespace WpfTreinamento
     /// </summary>
     public partial class App : Application
     {
+        private async void OnStartup(object sender, StartupEventArgs e)
+        {
+            var services = new ServiceCollection();
+            services.AddSingleton<MainWindowVM>();
+            services.AddSingleton<MainWindow>();
+            services.AddSingleton<FormTimes>();
+            services.AddScoped<ITimeRepository, TimeRepository>();
+            services.AddScoped<IViewModelIntermediate, ViewModelIntermediate>();
+            await using ServiceProvider container = services.BuildServiceProvider();
+
+            var mainWindow = container.GetService<MainWindow>();
+            mainWindow.Show();
+        }
     }
 }

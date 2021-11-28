@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>WpfTreinamento</id>
+    <version>1.0.0</version>
+    <authors>WpfTreinamento</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework="net6.0-windows7.0">
+        <dependency id="ModernUI.WPF" version="1.0.9" exclude="Build,Analyzers" />
+        <dependency id="System.Data.SqlClient" version="4.8.3" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net6.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
+      </group>
+    </frameworkReferences>
+  </metadata>
+  <files>
+    <file src="C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\bin\Debug\net6.0-windows\WpfTreinamento.runtimeconfig.json" target="lib\net6.0-windows7.0\WpfTreinamento.runtimeconfig.json" />
+    <file src="C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\bin\Debug\net6.0-windows\WpfTreinamento.dll" target="lib\net6.0-windows7.0\WpfTreinamento.dll" />
+  </files>
+</package>

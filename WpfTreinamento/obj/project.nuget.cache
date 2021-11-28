@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "t9Q1psA5MWjmkZc4TO0i/cflXPVfi/UXZ/0s7m8GlgMpo2I0PhgSoasFUclcHcBzNbc5nM2Eljk4pPfH30oaUg==",
+  "dgSpecHash": "JyEHOlsbDtwhPM8rxpAgvz3r5eBjfW7d6vYtWz37UXrkCg5deVPdB3JMoGcfOIZjaf2PnyOQwIFBPP5Dbahksw==",
   "success": true,
   "projectFilePath": "C:\\Lucas\\Treinamento\\WpfTreinamento\\WpfTreinamento\\WpfTreinamento.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\mathe\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\6.0.0\\microsoft.extensions.dependencyinjection.6.0.0.nupkg.sha512",
+    "C:\\Users\\mathe\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\mathe\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\mathe\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\mathe\\.nuget\\packages\\modernui.wpf\\1.0.9\\modernui.wpf.1.0.9.nupkg.sha512",
@@ -12,6 +14,7 @@
     "C:\\Users\\mathe\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\mathe\\.nuget\\packages\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\mathe\\.nuget\\packages\\system.data.sqlclient\\4.8.3\\system.data.sqlclient.4.8.3.nupkg.sha512",
+    "C:\\Users\\mathe\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\mathe\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
     "C:\\Users\\mathe\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512"
   ],
