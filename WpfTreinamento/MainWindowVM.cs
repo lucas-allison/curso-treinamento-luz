@@ -27,8 +27,9 @@ namespace WpfTreinamento
         public ICommand deletar { get; private set; }
         public ICommand editar { get; private set; }
         public ICommand limparCampos { get; private set; }
+        public IConexao conexao { get; private set; }
+        public GerenciadorConexoes gerenciaConexao { get; set; }
 
-        private ITimeRepository timeRepository;
         private readonly ViewModelIntermediate viewModelIntermediate;
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -37,9 +38,10 @@ namespace WpfTreinamento
 
         #region Construtor
 
-        public MainWindowVM(ITimeRepository _timeRepository)
+        public MainWindowVM()
         {
-            timeRepository = _timeRepository;
+            gerenciaConexao = new GerenciadorConexoes();
+            conexao = gerenciaConexao.pegaBanco("postgresql");
             viewModelIntermediate = new ViewModelIntermediate(this);
 
             LoadGrid();
@@ -54,7 +56,7 @@ namespace WpfTreinamento
 
         private void LoadGrid()
         {
-            timeList = timeRepository.ListarTimes();
+            timeList = new ObservableCollection<Time>(conexao.ListarTimes());
 
             if (timeList.Count == 0)
             {
@@ -74,7 +76,7 @@ namespace WpfTreinamento
                 if (MessageBox.Show("Deseja Remover este Registro?", "Remover Registro", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.No)
                 {
                     Time time = (Time)listgrid.SelectedItem;
-                    int result = timeRepository.DeletaTime(time.ID);
+                    int result = conexao.DeletaTime(time.ID);
 
                     if (result > 0)
                     {
@@ -101,7 +103,7 @@ namespace WpfTreinamento
 
             if (EstaValido(time))
             {
-                result = timeRepository.AdicionaTime(time);
+                result = conexao.AdicionaTime(time);
 
                 if (result > 0)
                 {
@@ -130,7 +132,7 @@ namespace WpfTreinamento
             {
                 if (EstaValido(time))
                 {
-                    result = timeRepository.EditaTime(time);
+                    result = conexao.EditaTime(time);
 
                     if (result > 0)
                     {

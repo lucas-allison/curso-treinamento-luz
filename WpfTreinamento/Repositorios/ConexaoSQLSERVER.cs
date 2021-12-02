@@ -12,22 +12,29 @@ using System.Data;
 
 namespace WpfTreinamento
 {
-    public class TimeRepository : ITimeRepository
+    public class ConexaoSQLSERVER : IConexao
     {
         #region Declarations
 
-        private SqlConnection connectionString = new SqlConnection(@"Data Source=DESKTOP-PPGQ64R;Initial Catalog=DBTreinamento;Persist Security Info=True;User ID=sa;Password=root");
-        private string table = "Time";
+        private SqlConnection connectionString;
+        private string table;
+        List<Time> timeList;
 
         #endregion
+
+        public ConexaoSQLSERVER()
+        {
+           connectionString = new SqlConnection(@"Data Source=DESKTOP-PPGQ64R;Initial Catalog=DBTreinamento;Persist Security Info=True;User ID=sa;Password=root");
+           table = "Time";
+        }
 
         #region Methods
 
         #region Consultar Itens
 
-        public ObservableCollection<Time> ListarTimes()
+        public List<Time> ListarTimes()
         {
-            ObservableCollection<Time> timeList = new ObservableCollection<Time>();
+            timeList = new List<Time>();
             SqlCommand cmd = new SqlCommand($"select * from {table} order by ID", connectionString);
 
             connectionString.Open();
@@ -81,12 +88,10 @@ namespace WpfTreinamento
             {
                 MessageBox.Show($"Não foi possível adicionar time: {ex.Message}", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            finally
-            {
-                cmd.Dispose();
-                connectionString.Close();
-            }
-
+            
+            cmd.Dispose();
+            connectionString.Close();
+            
             return result;
         }
 
@@ -114,15 +119,12 @@ namespace WpfTreinamento
             {
                 MessageBox.Show($"Não foi possível editar time: {ex.Message}", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            finally
-            {
-                cmd.Dispose();
-                connectionString.Close();
-            }
+
+            cmd.Dispose();
+            connectionString.Close();
 
             return result;
         }
-
         #endregion
 
         #region Remover Itens
@@ -141,11 +143,9 @@ namespace WpfTreinamento
             {
                 MessageBox.Show($"Não foi possível remover time: {ex.Message}", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            finally
-            {
-                cmd.Dispose();
-                connectionString.Close();
-            }
+
+            cmd.Dispose();
+            connectionString.Close();
 
             return result;
         }

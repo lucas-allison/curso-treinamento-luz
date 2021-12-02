@@ -16,7 +16,9 @@ namespace WpfTreinamento
             services.AddSingleton<MainWindowVM>();
             services.AddSingleton<MainWindow>();
             services.AddSingleton<FormTimes>();
-            services.AddScoped<ITimeRepository, TimeRepository>();
+            services.AddScoped<IConexao, ConexaoSQLSERVER>();
+            services.AddScoped<IConexao, ConexaoMySQL>();
+            services.AddScoped<IConexao, ConexaoPostgresSQL>();
             services.AddScoped<IViewModelIntermediate, ViewModelIntermediate>();
             await using ServiceProvider container = services.BuildServiceProvider();
 

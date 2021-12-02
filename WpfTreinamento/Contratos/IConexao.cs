@@ -1,11 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using WpfTreinamento.Modelos;
 
 namespace WpfTreinamento.Contratos
 {
-    public interface ITimeRepository
+    public interface IConexao
     {
-        ObservableCollection<Time> ListarTimes();
+        List<Time> ListarTimes();
 
         int AdicionaTime(Time time);
 

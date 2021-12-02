@@ -31,3 +31,13 @@ C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\obj\Debug\net6.0-windows\WpfT
 C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\obj\Debug\net6.0-windows\WpfTreinamento.genruntimeconfig.cache
 C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\bin\Debug\net6.0-windows\Microsoft.Extensions.DependencyInjection.dll
 C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\bin\Debug\net6.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\obj\Debug\net6.0-windows\WpfTreinamento.csproj.AssemblyReference.cache
+C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\bin\Debug\net6.0-windows\BouncyCastle.Crypto.dll
+C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\bin\Debug\net6.0-windows\Google.Protobuf.dll
+C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\bin\Debug\net6.0-windows\K4os.Compression.LZ4.dll
+C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\bin\Debug\net6.0-windows\K4os.Compression.LZ4.Streams.dll
+C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\bin\Debug\net6.0-windows\K4os.Hash.xxHash.dll
+C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\bin\Debug\net6.0-windows\MySql.Data.dll
+C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\bin\Debug\net6.0-windows\Ubiety.Dns.Core.dll
+C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\bin\Debug\net6.0-windows\ZstdNet.dll
+C:\Lucas\Treinamento\WpfTreinamento\WpfTreinamento\bin\Debug\net6.0-windows\Npgsql.dll
