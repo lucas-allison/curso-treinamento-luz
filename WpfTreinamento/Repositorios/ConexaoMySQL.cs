@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
-//using System.Data.SqlClient;
 using System.Windows;
 using WpfTreinamento.Modelos;
 using System.Collections.ObjectModel;
@@ -68,10 +67,10 @@ namespace WpfTreinamento.Repositorios
 
         #region Adicionar Itens
 
-        public int AdicionaTime(Time time)
+        public string AdicionaTime(Time time)
         {
             MySqlCommand cmd = new MySqlCommand($"INSERT INTO {table} (Nome, Divisao, Regiao, NomeCampeonato) VALUES (@Nome, @Divisao, @Regiao, @NomeCampeonato)", mysqlCon);
-            int result = 0;
+            string mensagem;
 
             try
             {
@@ -81,27 +80,30 @@ namespace WpfTreinamento.Repositorios
                 cmd.Parameters.AddWithValue("@Regiao", time.Regiao);
                 cmd.Parameters.AddWithValue("@NomeCampeonato", time.NomeCampeonato);
                 mysqlCon.Open();
-                result = cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
+
+                mensagem = "Registrado Salvo com Sucesso!!";
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Não foi possível adicionar time: {ex.Message}", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                mensagem = $"Não foi possível adicionar time: {ex.Message}";
+                //MessageBox.Show($"Não foi possível adicionar time: {ex.Message}", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
             }     
             
             cmd.Dispose();
             mysqlCon.Close();            
 
-            return result;
+            return mensagem;
         }
 
         #endregion
 
         #region Editar Itens
 
-        public int EditaTime(Time time)
+        public string EditaTime(Time time)
         {
             MySqlCommand cmd = new MySqlCommand($"UPDATE {table} SET Nome = @Nome, Divisao = @Divisao, Regiao = @Regiao, NomeCampeonato = @NomeCampeonato WHERE ID = @ID", mysqlCon);
-            int result = 0;
+            string mensagem;
 
             try
             {
@@ -112,42 +114,48 @@ namespace WpfTreinamento.Repositorios
                 cmd.Parameters.AddWithValue("@Regiao", time.Regiao);
                 cmd.Parameters.AddWithValue("@NomeCampeonato", time.NomeCampeonato);
                 mysqlCon.Open();
-                result = cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
+
+                mensagem = "Registro Editado com Sucesso!!";
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Não foi possível editar time: {ex.Message}", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                mensagem = $"Não foi possível editar time: {ex.Message}";
+                //MessageBox.Show($"Não foi possível editar time: {ex.Message}", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
             }
           
             cmd.Dispose();
             mysqlCon.Close();            
 
-            return result;
+            return mensagem;
         }
 
         #endregion
 
         #region Remover Itens
 
-        public int DeletaTime(int id)
+        public string DeletaTime(int id)
         {
             MySqlCommand cmd = new MySqlCommand($"DELETE FROM {table} Where ID = {id}", mysqlCon);
-            int result = 0;
+            string mensagem;
 
             try
             {
                 mysqlCon.Open();
-                result = cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
+
+                mensagem = "Registro Removido com Sucesso!!";
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Não foi possível remover time: {ex.Message}", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                mensagem = $"Não foi possívem remover time: {ex.Message}";
+                //MessageBox.Show($"Não foi possível remover time: {ex.Message}", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             
             cmd.Dispose();
             mysqlCon.Close();
 
-            return result;
+            return mensagem;
         }
 
         #endregion

@@ -69,10 +69,10 @@ namespace WpfTreinamento
 
         #region Adicionar Itens
 
-        public int AdicionaTime(Time time)
+        public string AdicionaTime(Time time)
         {
             SqlCommand cmd = new SqlCommand($"INSERT INTO {table} VALUES (@Nome, @Divisao, @Regiao, @NomeCampeonato)", connectionString);
-            int result = 0;
+            string mensagem;
 
             try
             {
@@ -82,27 +82,29 @@ namespace WpfTreinamento
                 cmd.Parameters.AddWithValue("@Regiao", time.Regiao);
                 cmd.Parameters.AddWithValue("@NomeCampeonato", time.NomeCampeonato);
                 connectionString.Open();
-                result = cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
+
+                mensagem = "Registro Salvo com Sucesso!!";
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Não foi possível adicionar time: {ex.Message}", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                mensagem = $"Não foi possível adicionar time: {ex.Message}";
             }
             
             cmd.Dispose();
             connectionString.Close();
             
-            return result;
+            return mensagem;
         }
 
         #endregion
 
         #region Editar Itens
 
-        public int EditaTime(Time time)
+        public string EditaTime(Time time)
         {
             SqlCommand cmd = new SqlCommand($"UPDATE {table} SET Nome = @Nome, Divisao = @Divisao, Regiao = @Regiao, NomeCampeonato = @NomeCampeonato WHERE ID = @ID", connectionString);
-            int result = 0;
+            string mensagem;
 
             try
             {
@@ -113,41 +115,46 @@ namespace WpfTreinamento
                 cmd.Parameters.AddWithValue("@Regiao", time.Regiao);
                 cmd.Parameters.AddWithValue("@NomeCampeonato", time.NomeCampeonato);
                 connectionString.Open();
-                result = cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
+
+                mensagem = "Registro Editado com Sucesso!!";
             }
             catch (SqlException ex)
             {
-                MessageBox.Show($"Não foi possível editar time: {ex.Message}", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                mensagem = $"Não foi possível editar time: {ex.Message}";
             }
 
             cmd.Dispose();
             connectionString.Close();
 
-            return result;
+            return mensagem;
         }
         #endregion
 
         #region Remover Itens
 
-        public int DeletaTime(int id)
+        public string DeletaTime(int id)
         {
             SqlCommand cmd = new SqlCommand($"DELETE FROM {table} Where ID = {id}", connectionString);
-            int result = 0;
+            string mensagem;
 
             try
             {
                 connectionString.Open();
-                result = cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
+
+                mensagem = "Registro Removido com Sucesso!!";
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Não foi possível remover time: {ex.Message}", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                mensagem = $"Não foi possível remover time: {ex.Message}";
+                //MessageBox.Show($"Não foi possível remover time: {ex.Message}", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             cmd.Dispose();
             connectionString.Close();
 
-            return result;
+            return mensagem;
         }
 
         #endregion

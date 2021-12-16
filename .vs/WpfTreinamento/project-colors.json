@@ -10,7 +10,12 @@
       "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
       "DisplayName": "Arquivos Diversos",
       "ColorIndex": -1
+    },
+    "bf89fba9-a7ac-4284-8694-adec49faddea": {
+      "ProjectGuid": "bf89fba9-a7ac-4284-8694-adec49faddea",
+      "DisplayName": "WpfTreinamento.Teste",
+      "ColorIndex": 1
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 2
 }

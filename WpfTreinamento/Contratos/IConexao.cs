@@ -8,10 +8,10 @@ namespace WpfTreinamento.Contratos
     {
         List<Time> ListarTimes();
 
-        int AdicionaTime(Time time);
+        string AdicionaTime(Time time);
 
-        int EditaTime(Time time);
+        string EditaTime(Time time);
 
-        int DeletaTime(int id);
+        string DeletaTime(int id);
     }
 }

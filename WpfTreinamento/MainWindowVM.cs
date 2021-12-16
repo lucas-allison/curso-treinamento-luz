@@ -20,6 +20,7 @@ namespace WpfTreinamento
         private ObservableCollection<Time> _timeList;
         private Time _time;
         public ObservableCollection<Time> timeList { get { return _timeList; } set { _timeList = value; Notifica(nameof(timeList)); } }
+        public ObservableCollection<string> listaBanco { get; set; }
         public Time time { get { return _time; } set { _time = value; Notifica(nameof(time)); } }
         public ICommand abrirTelaFT { get; private set; }
         public ICommand abrirTelaMW { get; private set; }
@@ -27,6 +28,7 @@ namespace WpfTreinamento
         public ICommand deletar { get; private set; }
         public ICommand editar { get; private set; }
         public ICommand limparCampos { get; private set; }
+        public ICommand carregaConexaoSelecionada { get; private set; }
         public IConexao conexao { get; private set; }
         public GerenciadorConexoes gerenciaConexao { get; set; }
 
@@ -41,7 +43,8 @@ namespace WpfTreinamento
         public MainWindowVM()
         {
             gerenciaConexao = new GerenciadorConexoes();
-            conexao = gerenciaConexao.pegaBanco("postgresql");
+            listaBanco = new ObservableCollection<string>(gerenciaConexao.listaBanco());
+            conexao = gerenciaConexao.pegaBanco(listaBanco[0]);
             viewModelIntermediate = new ViewModelIntermediate(this);
 
             LoadGrid();
@@ -76,13 +79,9 @@ namespace WpfTreinamento
                 if (MessageBox.Show("Deseja Remover este Registro?", "Remover Registro", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.No)
                 {
                     Time time = (Time)listgrid.SelectedItem;
-                    int result = conexao.DeletaTime(time.ID);
-
-                    if (result > 0)
-                    {
-                        MessageBox.Show("Registro Removido", "Deletar Registro", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-
+                                        
+                    MessageBox.Show(conexao.DeletaTime(time.ID), "Deletar Registro", MessageBoxButton.OK, MessageBoxImage.Information);
+                    
                     LoadGrid();
                 }
             }
@@ -99,23 +98,13 @@ namespace WpfTreinamento
         private void AdicionaTime(object parametro)
         {
             FormTimes formTime = (FormTimes)parametro;
-            int result = 0;
 
             if (EstaValido(time))
-            {
-                result = conexao.AdicionaTime(time);
+            {            
+                MessageBox.Show(conexao.AdicionaTime(time), "Registro Salvo", MessageBoxButton.OK, MessageBoxImage.Information);
+                AbrirTelaMainWindow(formTime);
 
-                if (result > 0)
-                {
-                    MessageBox.Show("Registro salvo com sucesso!!", "Registro Salvo", MessageBoxButton.OK, MessageBoxImage.Information);
-                    AbrirTelaMainWindow(formTime);
-
-                    LoadGrid();
-                }
-                else
-                {
-                    MessageBox.Show("Não foi possível adicionar o time", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                LoadGrid();                
             }
         }
 
@@ -126,23 +115,13 @@ namespace WpfTreinamento
         private void EditaTime(object parametro)
         {
             FormTimes formTime = (FormTimes)parametro;
-            int result = 0;
 
             if (MessageBox.Show("Deseja Editar este Registro?", "Editar Registro", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.No)
             {
                 if (EstaValido(time))
-                {
-                    result = conexao.EditaTime(time);
-
-                    if (result > 0)
-                    {
-                        MessageBox.Show("Registro Editado com Sucesso!!", "Editar Registro", MessageBoxButton.OK, MessageBoxImage.Information);
-                        AbrirTelaMainWindow(formTime);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Não foi possível editar o time", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
+                {                                        
+                    MessageBox.Show(conexao.EditaTime(time), "Editar Registro", MessageBoxButton.OK, MessageBoxImage.Information);
+                    AbrirTelaMainWindow(formTime);
                 }
             }
         }
@@ -169,6 +148,8 @@ namespace WpfTreinamento
             MainWindow mainWindow;
             time = new Time();
             FormTimes formTime = viewModelIntermediate.FormTimesInstantiate();
+            FormTimes formTime2 = new FormTimes(this);
+            formTime2.DataContext = time;
 
             switch (parametro)
             {
@@ -284,6 +265,7 @@ namespace WpfTreinamento
                 FormTimes formTime = (FormTimes)parametro;
                 AbrirTelaMainWindow(formTime);
             });
+
         }
 
         private bool ValidaBloqueioBotaoDeletar(object propriedade)

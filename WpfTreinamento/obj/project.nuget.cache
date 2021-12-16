@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "9b1yVhvDzhyvZVapvRxrKKExCrfm0MPrVpKfSnCZhjbbu849uEBgVnz604j2jJ5RFrJdGDbvN+2mfYvskCn0ng==",
+  "dgSpecHash": "JLwyXqDczUu9Fz4Jkgw1KG2ky0vD5S2aNehJeTNZxXAypevR5kTrxLJhuNkuPFWYlZBNeI5jDDMumPbkLJNYtw==",
   "success": true,
   "projectFilePath": "C:\\Lucas\\Treinamento\\WpfTreinamento\\WpfTreinamento\\WpfTreinamento.csproj",
   "expectedPackageFiles": [
@@ -16,7 +16,10 @@
     "C:\\Users\\mathe\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\mathe\\.nuget\\packages\\modernui.wpf\\1.0.9\\modernui.wpf.1.0.9.nupkg.sha512",
     "C:\\Users\\mathe\\.nuget\\packages\\mysql.data\\8.0.27\\mysql.data.8.0.27.nupkg.sha512",
+    "C:\\Users\\mathe\\.nuget\\packages\\netstandard.library\\2.0.0\\netstandard.library.2.0.0.nupkg.sha512",
     "C:\\Users\\mathe\\.nuget\\packages\\npgsql\\6.0.0\\npgsql.6.0.0.nupkg.sha512",
+    "C:\\Users\\mathe\\.nuget\\packages\\nunit\\3.13.2\\nunit.3.13.2.nupkg.sha512",
+    "C:\\Users\\mathe\\.nuget\\packages\\nunit3testadapter\\4.1.0\\nunit3testadapter.4.1.0.nupkg.sha512",
     "C:\\Users\\mathe\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.7.0\\runtime.native.system.data.sqlclient.sni.4.7.0.nupkg.sha512",
     "C:\\Users\\mathe\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\mathe\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",

@@ -160,6 +160,34 @@
           }
         }
       },
+      "NETStandard.Library/2.0.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "3.1.0"
+        }
+      },
+      "Npgsql/6.0.0": {
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/Npgsql.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.0.0"
+          }
+        }
+      },
+      "NUnit/3.13.2": {
+        "dependencies": {
+          "NETStandard.Library": "2.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/nunit.framework.dll": {
+            "assemblyVersion": "3.13.2.0",
+            "fileVersion": "3.13.2.0"
+          }
+        }
+      },
+      "NUnit3TestAdapter/4.1.0": {},
       "runtime.native.System.Data.SqlClient.sni/4.7.0": {
         "dependencies": {
           "runtime.win-arm64.runtime.native.System.Data.SqlClient.sni": "4.4.0",
@@ -462,6 +490,34 @@
       "sha512": "sha512-Ef+sH12/nGAiF9yLZFkuXh7vtVvEPiLKyZNJiDk+VBULzLcXj0lmfU7qcmWNCSVX5n6zu5jMV+JaNf1C+a+T8g==",
       "path": "mysql.data/8.0.27",
       "hashPath": "mysql.data.8.0.27.nupkg.sha512"
+    },
+    "NETStandard.Library/2.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7jnbRU+L08FXKMxqUflxEXtVymWvNOrS8yHgu9s6EM8Anr6T/wIX4nZ08j/u3Asz+tCufp3YVwFSEvFTPYmBPA==",
+      "path": "netstandard.library/2.0.0",
+      "hashPath": "netstandard.library.2.0.0.nupkg.sha512"
+    },
+    "Npgsql/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-8m2AXZgX7b/VYL6D7aQ1M/hu7vQ+QvVHxaHelriupN2hZqEhcwJkPiICLBVSX/+xm+iN8mZVEUvD7ujmgpTgLw==",
+      "path": "npgsql/6.0.0",
+      "hashPath": "npgsql.6.0.0.nupkg.sha512"
+    },
+    "NUnit/3.13.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-u+fz/lXyR4vlamySNAEMrXvh+GhAQiB6/aVZtU5WjivR5zF26Ui0tfteDtWqT90k9D8y6g8rFKYQC97Z7d195w==",
+      "path": "nunit/3.13.2",
+      "hashPath": "nunit.3.13.2.nupkg.sha512"
+    },
+    "NUnit3TestAdapter/4.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-v45RJt87pPAWlCDIftmtQhNK0mXd81IcnTE6SmWUmxi6YegCvkQogZQ/ROw4zyNyo2HI3Ckby3LB0GHF4bEIXg==",
+      "path": "nunit3testadapter/4.1.0",
+      "hashPath": "nunit3testadapter.4.1.0.nupkg.sha512"
     },
     "runtime.native.System.Data.SqlClient.sni/4.7.0": {
       "type": "package",
